@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        fascinate: ['Fascinate', 'cursive'],
-        changaone: ['Changa one', 'italic'],
-        pacifico: ['Pacifico', 'cursive']
+        'fascinate': ['Fascinate', 'cursive'],
+        'changaone': ['Changa One', 'cursive'],
+        'pacifico': ['Pacifico', 'cursive'],
       },
     },
   },
