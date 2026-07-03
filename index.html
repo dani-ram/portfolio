@@ -27,6 +27,27 @@
 
     </ul>
   </nav>
+
+  <button
+    id="menu-toggle"
+    type="button"
+    aria-label="Abrir menú"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    class="md:hidden fixed z-50 top-5 right-5 w-12 h-12 flex flex-col items-center justify-center gap-1.5 bg-black pixel-border-sm border-fuchsia-500">
+    <span class="menu-line block w-6 h-0.5 bg-cyan-300"></span>
+    <span class="menu-line block w-6 h-0.5 bg-cyan-300"></span>
+    <span class="menu-line block w-6 h-0.5 bg-cyan-300"></span>
+  </button>
+
+  <nav id="mobile-menu" class="md:hidden fixed inset-0 z-40 bg-black flex items-center justify-center">
+    <ul class="flex flex-col items-center gap-10 text-sm list-none">
+        <li><a class="text-cyan-300 hover:text-yellow-300 duration-300 uppercase tracking-widest" href="#inicio">Inicio</a></li>
+        <li><a class="text-cyan-300 hover:text-yellow-300 duration-300 uppercase tracking-widest" href="#proyectos">Proyectos</a></li>
+        <li><a class="text-cyan-300 hover:text-yellow-300 duration-300 uppercase tracking-widest" href="#contacto">Contacto</a></li>
+        <li><a class="text-cyan-300 hover:text-yellow-300 duration-300 uppercase tracking-widest" href="#habilidades">Habilidades</a></li>
+    </ul>
+  </nav>
  </header>
 
  <main class="flex flex-col md:flex-wrap items-center justify-center gap-16 px-8 py-20">

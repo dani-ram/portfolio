@@ -78,6 +78,59 @@ function scrollReveals() {
   })
 }
 
+function mobileMenu() {
+  const toggle = document.getElementById('menu-toggle')
+  const menu = document.getElementById('mobile-menu')
+  const lines = toggle.querySelectorAll('.menu-line')
+  const links = menu.querySelectorAll('a')
+  let isOpen = false
+
+  gsap.set(menu, { autoAlpha: 0, y: -20 })
+
+  function openMenu() {
+    isOpen = true
+    toggle.setAttribute('aria-expanded', 'true')
+    gsap.set(menu, { pointerEvents: 'auto' })
+    gsap.to(menu, { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power2.out' })
+    gsap.fromTo(
+      links,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: 'back.out(1.7)', delay: 0.1 }
+    )
+    gsap.to(lines[0], { rotation: 45, y: 8, duration: 0.3 })
+    gsap.to(lines[1], { opacity: 0, duration: 0.2 })
+    gsap.to(lines[2], { rotation: -45, y: -8, duration: 0.3 })
+  }
+
+  function closeMenu() {
+    if (!isOpen) return
+    isOpen = false
+    toggle.setAttribute('aria-expanded', 'false')
+    gsap.to(menu, {
+      autoAlpha: 0,
+      y: -20,
+      duration: 0.3,
+      ease: 'power2.in',
+      onComplete: () => gsap.set(menu, { pointerEvents: 'none' }),
+    })
+    gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.3 })
+    gsap.to(lines[1], { opacity: 1, duration: 0.2 })
+    gsap.to(lines[2], { rotation: 0, y: 0, duration: 0.3 })
+  }
+
+  toggle.addEventListener('click', () => (isOpen ? closeMenu() : openMenu()))
+  links.forEach((link) => link.addEventListener('click', closeMenu))
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu()
+  })
+
+  const desktopQuery = window.matchMedia('(min-width: 768px)')
+  desktopQuery.addEventListener('change', (e) => {
+    if (e.matches) closeMenu()
+  })
+}
+
 // Ambient flicker on the neon text, desynced per element so it reads like tube signage
 function neonFlicker() {
   gsap.utils.toArray('.neon-cyan, .neon-magenta, .neon-yellow').forEach((el) => {
@@ -94,4 +147,5 @@ export function initAnimations() {
   bootSequence()
   scrollReveals()
   neonFlicker()
+  mobileMenu()
 }
